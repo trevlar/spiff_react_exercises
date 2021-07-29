@@ -1,6 +1,6 @@
 import React from "react";
 import Exercise from "../exercise/Exercise";
-import ProgressBarSolution from "../progress_bar_solution/ProgressBarSolution";
+import ProgressBarSolution from "./ProgressBarSolution/ProgressBarSolution";
 
 const ProgressBarExercise = () => {
   return (
