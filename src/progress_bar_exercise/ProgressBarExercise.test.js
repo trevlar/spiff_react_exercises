@@ -4,9 +4,7 @@ import ProgressBarExercise from './ProgressBarExercise';
 
 describe('ProgressBar', () => {
     it('renders properly with expected snapshot', () => {
-        const progressBarExercise = render((
-            <ProgressBarExercise solution={<div />} specsUrl="test.com" title="Progress Bar Exercise Test"/>
-        ));
+        const progressBarExercise = render(<ProgressBarExercise />);
         expect(progressBarExercise).toMatchSnapshot()
     })
 })
