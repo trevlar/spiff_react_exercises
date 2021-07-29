@@ -1,23 +1,21 @@
 import React from 'react';
-import './css/progress-bar.css'
+import './progress-bar-solution.css'
 import ProgressBar from './components/ProgressBar/ProgressBar';
-import useProgressBar from './ProgressBarHook'
+import useRequestTimer from './RequestTimerHook'
 
 const ProgressBarSolution = () => {
     const {
-        showProgressBar,
+        showProgress,
         percent,
         startRequest,
         isLoading,
         finishRequest
-    } = useProgressBar();
+    } = useRequestTimer();
 
     return (
         <>
-            {showProgressBar && (
-                <div className="progress-container">
-                    <ProgressBar percent={percent} width={400} /> <span> {parseInt(percent * 100)}%</span>
-                </div>
+            {showProgress && (
+                <ProgressBar percent={percent} width={400} />
             )}
             <button className="btn btn-success" onClick={startRequest} disabled={isLoading}>
                 {isLoading ? 'Loading...' : 'Start Request'}

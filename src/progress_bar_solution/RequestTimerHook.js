@@ -7,7 +7,7 @@ import {
     STOP_REQUEST,
     FINISH_REQUEST,
     INCREMENT_PERCENT,
-    TOGGLE_PROGESS_BAR,
+    HIDE_PROGRESS,
 } from './constants';
 
 const ACTIONS = {
@@ -15,17 +15,17 @@ const ACTIONS = {
     [STOP_REQUEST]: STOP_REQUEST,
     [FINISH_REQUEST]: FINISH_REQUEST,
     [INCREMENT_PERCENT]: INCREMENT_PERCENT,
-    [TOGGLE_PROGESS_BAR]: TOGGLE_PROGESS_BAR,
+    [HIDE_PROGRESS]: HIDE_PROGRESS,
 }
 
 export const initialState = {
     maxPercent: COMPLETE_REQUEST,
     percent: 0,
     isLoading: false,
-    showProgressBar: true,
+    showProgress: true,
 };
 
-function progressBarReducer(state, action) {
+function requestTimerReducer(state, action) {
     const {
         maxPercent,
         percent,
@@ -40,7 +40,7 @@ function progressBarReducer(state, action) {
                 maxPercent: PARTIAL_REQUEST,
                 percent: newPercent,
                 isLoading: true,
-                showProgressBar: true,
+                showProgress: true,
             };
 
         case ACTIONS.FINISH_REQUEST:
@@ -49,7 +49,7 @@ function progressBarReducer(state, action) {
                 maxPercent: COMPLETE_REQUEST,
                 percent: newPercent,
                 isLoading: true,
-                showProgressBar: true,
+                showProgress: true,
             };
 
         case ACTIONS.STOP_REQUEST:
@@ -67,11 +67,11 @@ function progressBarReducer(state, action) {
                 isLoading,
             }
 
-        case ACTIONS.TOGGLE_PROGESS_BAR:
-            const showProgressBar = percent >= COMPLETE_REQUEST ? false : true
+        case ACTIONS.HIDE_PROGRESS:
             return {
                 ...state,
-                showProgressBar,
+                showProgress: false,
+                percent: 0,
             }
 
         default:
@@ -80,27 +80,27 @@ function progressBarReducer(state, action) {
 }
 
 let loadingInterval;
-function useProgressBar() {
-    const [state, dispatch] = useReducer(progressBarReducer, initialState);
+function useRequestTimer() {
+    const [state, dispatch] = useReducer(requestTimerReducer, initialState);
     const {
         maxPercent,
         percent,
         isLoading,
-        showProgressBar,
+        showProgress,
     } = state;
 
     useEffect(() => {
         if (percent >= maxPercent) {
-            stopInterval();
+            stopIntervalTimer();
         }
         if (percent >= COMPLETE_REQUEST) {
-            setTimeout(() => dispatch({ type: ACTIONS.TOGGLE_PROGESS_BAR, isHidden: true }), 3000);
+            setTimeout(() => dispatch({ type: ACTIONS.HIDE_PROGRESS, isHidden: true }), 3000);
         }
     }, [percent, maxPercent, isLoading])
 
-    function startInterval() {
+    function startIntervalTimer() {
         if (loadingInterval) {
-            stopInterval();
+            stopIntervalTimer();
         }
 
         loadingInterval = setInterval(() => {
@@ -108,23 +108,23 @@ function useProgressBar() {
         }, PROGRESS_INCREMENT);
     }
 
-    function stopInterval() {
+    function stopIntervalTimer() {
         clearInterval(loadingInterval);
         dispatch({ type: ACTIONS.STOP_REQUEST });
     }
 
     function startRequest() {
         dispatch({ type: ACTIONS.START_REQUEST });
-        startInterval();
+        startIntervalTimer();
     }
 
     function finishRequest() {
         dispatch({ type: ACTIONS.FINISH_REQUEST });
-        startInterval();
+        startIntervalTimer();
     }
 
     return {
-        showProgressBar,
+        showProgress,
         percent,
         startRequest,
         isLoading,
@@ -132,4 +132,4 @@ function useProgressBar() {
     };
 }
 
-export default useProgressBar;
+export default useRequestTimer;

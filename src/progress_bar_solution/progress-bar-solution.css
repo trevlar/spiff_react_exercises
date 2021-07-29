@@ -1,0 +1,30 @@
+button.btn {
+  border-radius: 2.45em;
+  border: 1px solid transparent;
+  color: #000;
+  font-size: 1.25em;
+  font-weight: 500;
+  height: 45px;
+  text-transform: uppercase;
+  width: 220px;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+
+button.btn-success {
+  border-color: #00b49b;
+  color: #00b49b;
+}
+
+button.btn-warning {
+  border-color: red;
+  color: red;
+}
+
+button.btn:hover {
+  border-width: 2px;
+}
+
+button.btn:focus {
+  border-width: 3px;
+}
