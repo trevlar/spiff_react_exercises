@@ -1,7 +1,7 @@
 import React from 'react';
 import './progress-bar-solution.css'
-import ProgressBar from './components/ProgressBar/ProgressBar';
-import useRequestTimer from './RequestTimerHook'
+import ProgressBar from './ProgressBar/ProgressBar';
+import useRequestTimer from './hooks/RequestTimerHook';
 
 const ProgressBarSolution = () => {
     const {

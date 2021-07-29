@@ -18,7 +18,7 @@ const ACTIONS = {
     [HIDE_PROGRESS]: HIDE_PROGRESS,
 }
 
-export const initialState = {
+const initialState = {
     maxPercent: COMPLETE_REQUEST,
     percent: 0,
     isLoading: false,
