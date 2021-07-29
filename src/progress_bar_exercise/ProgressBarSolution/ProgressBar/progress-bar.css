@@ -1,0 +1,21 @@
+.progress-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.progress-bar {
+  background-color: rgb(233, 233, 233);
+  border-radius: 0.5rem;
+  margin-right: 10px;
+}
+
+.progress {
+  background-color: orange;
+  background-image: linear-gradient(to right, orange 37%, red 69%);
+  height: 6px;
+  border-radius: 1rem;
+  transition: 1s ease;
+  transition-delay: 0.1s;
+}
