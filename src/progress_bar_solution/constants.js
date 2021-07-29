@@ -1,4 +1,4 @@
-export const REQUEST_TIME = 1000;
+export const REQUEST_TIME = 15000;
 export const PARTIAL_REQUEST = 0.9;
 export const COMPLETE_REQUEST = 1;
 export const PROGRESS_INCREMENT = REQUEST_TIME / (PARTIAL_REQUEST * 100);
